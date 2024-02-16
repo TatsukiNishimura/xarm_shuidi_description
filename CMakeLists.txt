@@ -31,6 +31,7 @@ install(DIRECTORY
   xacro
   ros2_control
   rviz
+  meshes
   DESTINATION share/${PROJECT_NAME}/
 )
 

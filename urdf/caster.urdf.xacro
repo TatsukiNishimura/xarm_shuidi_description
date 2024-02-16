@@ -1,24 +1,24 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="caster">
-    <xacro:macro name="caster" params="parent xyz:='0 0 0' rpy:='0 0 0'">
-        <joint name="caster_joint" type="fixed">
+    <xacro:macro name="caster" params="prefix parent xyz:='0 0 0' rpy:='0 0 0'">
+        <joint name="${prefix}_caster_joint" type="fixed">
             <origin xyz="${xyz}" rpy="${rpy}" />
             <parent link="${parent}" />
-            <child link="caster" />
+            <child link="${prefix}_caster" />
         </joint>
-        <transmission name="caster_trans" type="SimpleTransmission">
+        <transmission name="${prefix}_caster_trans" type="SimpleTransmission">
             <type>transmission_interface/SimpleTransmission</type>
-            <actuator name="caster_motor">
+            <actuator name="${prefix}_caster_motor">
                 <!-- ギア比 -->
                 <mechanicalReduction>1</mechanicalReduction>
             </actuator>
-            <joint name="caster_joint">
+            <joint name="${prefix}_caster_joint">
                 <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
             </joint>
         </transmission>
 
         <!-- caster frontal wheel Link -->
-        <link name="caster">
+        <link name="${prefix}_caster">
             <collision>
                 <geometry>
                     <sphere radius="0.05" />
@@ -46,7 +46,7 @@
                     izz="0.1" />
             </inertial>
         </link>
-        <gazebo reference="caster">
+        <gazebo reference="${prefix}_caster">
             <material>Gazebo/Blue</material>
             <!-- 摩擦係数はとりあえず0にして引っかからないようにする -->
             <mu1>0.0</mu1>

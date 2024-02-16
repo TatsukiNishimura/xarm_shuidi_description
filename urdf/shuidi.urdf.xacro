@@ -10,11 +10,12 @@
 
 
     <xacro:body />
-    <xacro:wheel prefix="left" parent="base_link" xyz="0.125 0.21 0.125" rpy="-1.5707 0 0" />
-    <xacro:wheel prefix="right" parent="base_link" xyz="0.125 -0.21 0.125" rpy="-1.5707 0 0" />
-    <xacro:caster parent="base_link" xyz="-0.25 0 0.05" rpy="1.57 0 0" />
-    <xacro:lidar parent="base_link" xyz="0.3 0 0.28" rpy="0 0 0" />
-    <xacro:imu parent="base_link" xyz="0 0 0.8" rpy="0 0 0" />
+    <xacro:wheel prefix="left" parent="base_link" xyz="0 0.18 0.059" rpy="-1.5707 0 0" />
+    <xacro:wheel prefix="right" parent="base_link" xyz="0 -0.18 0.059" rpy="-1.5707 0 0" />
+    <xacro:caster prefix="front" parent="base_link" xyz="0.097 0 0.034" rpy="1.57 0 0" />
+    <xacro:caster prefix="rear" parent="base_link" xyz="-0.14 0 0.034" rpy="1.57 0 0" />
+    <!-- <xacro:lidar parent="base_link" xyz="0.3 0 0.28" rpy="0 0 0" />
+    <xacro:imu parent="base_link" xyz="0 0 0.8" rpy="0 0 0" /> -->
     <xacro:diff_drive_control left_joint="left_wheel_joint" right_joint="right_wheel_joint" />
 
 
