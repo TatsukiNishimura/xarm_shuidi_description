@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="caster">
+    <xacro:macro name="battery" params="prefix parent xyz:='0 0 0' rpy:='0 0 0'">
+        <joint name="${prefix}battery_joint" type="fixed">
+            <origin xyz="${xyz}" rpy="${rpy}" />
+            <parent link="${parent}" />
+            <child link="${prefix}battery" />
+        </joint>
+
+
+
+        <link name="${prefix}battery">
+            <collision>
+                <geometry>
+                       <mesh filename="file://$(find xarm_shuidi_description)/meshes/battery.stl"/>
+                </geometry>
+            </collision>
+            <visual>
+                <geometry>
+                       <mesh filename="file://$(find xarm_shuidi_description)/meshes/battery.stl"/>
+                </geometry>
+               <material name="white">
+                    <color rgba="1 1 1 1" />
+                </material>
+            </visual>
+        </link>
+
+        <joint name="${prefix}battery_fixture_joint" type="fixed">
+            <origin xyz="${xyz}" rpy="${rpy}" />
+            <parent link="${parent}" />
+            <child link="${prefix}battery_fixture" />
+        </joint>
+
+        <link name="${prefix}battery_fixture">
+            <collision>
+                <geometry>
+                       <mesh filename="file://$(find xarm_shuidi_description)/meshes/battery_fixture.stl"/>
+                </geometry>
+            </collision>
+
+            <visual>
+                <geometry>
+                       <mesh filename="file://$(find xarm_shuidi_description)/meshes/battery_fixture.stl"/>
+                </geometry>
+                <material name="white">
+                    <color rgba="1 1 1 1" />
+                </material>
+            </visual>
+        </link>
+
+    </xacro:macro>
+</robot>

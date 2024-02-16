@@ -19,7 +19,14 @@ from ament_index_python.packages import get_package_share_directory
 from launch_ros.actions import Node
 
 from launch import LaunchDescription
-from launch.conditions import IfCondition
+from launch.actions import (
+    ExecuteProcess,
+    IncludeLaunchDescription,
+    RegisterEventHandler,
+)
+from launch.conditions import IfCondition, UnlessCondition
+from launch.event_handlers import OnProcessExit
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 
 gazebo_ros2_control_demos_path = os.path.join(
@@ -33,10 +40,22 @@ urdf_path = os.path.join(gazebo_ros2_control_demos_path, "urdf", "xarm_shuidi.ur
 
 def generate_launch_description():
     show_rviz = LaunchConfiguration("show_rviz", default=True)
+    world_file = os.path.join(gazebo_ros2_control_demos_path, "world", "empty.world")
 
     rviz_config_path = os.path.join(
         gazebo_ros2_control_demos_path, "rviz", "show_urdf.rviz"
     )
+
+    gazebo = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            [
+                os.path.join(get_package_share_directory("gazebo_ros"), "launch"),
+                "/gazebo.launch.py",
+            ]
+        ),
+        launch_arguments={"world": world_file}.items(),
+    )
+
     doc = xacro.process_file(xacro_file)
     robot_desc = doc.toprettyxml(indent="  ")
     f = open(urdf_path, "w")
@@ -67,6 +86,38 @@ def generate_launch_description():
         # ],
     )
 
+    spawn_entity = Node(
+        package="gazebo_ros",
+        executable="spawn_entity.py",
+        arguments=["-topic", "robot_description", "-entity", "diff_drive"],
+        output="screen",
+        parameters=[{"use_sim_time": True}],
+    )
+
+    load_joint_state_controller = ExecuteProcess(
+        cmd=[
+            "ros2",
+            "control",
+            "load_controller",
+            "--set-state",
+            "active",
+            "joint_state_broadcaster",
+        ],
+        output="screen",
+    )
+
+    load_joint_trajectory_controller = ExecuteProcess(
+        cmd=[
+            "ros2",
+            "control",
+            "load_controller",
+            "--set-state",
+            "active",
+            "diff_drive_base_controller",
+        ],
+        output="screen",
+    )
+
     rviz = Node(
         package="rviz2",
         executable="rviz2",
@@ -77,8 +128,24 @@ def generate_launch_description():
 
     return LaunchDescription(
         [
+            RegisterEventHandler(
+                event_handler=OnProcessExit(
+                    target_action=spawn_entity,
+                    on_exit=[
+                        load_joint_state_controller,
+                    ],
+                )
+            ),
+            RegisterEventHandler(
+                event_handler=OnProcessExit(
+                    target_action=load_joint_state_controller,
+                    on_exit=[load_joint_trajectory_controller],
+                )
+            ),
+            gazebo,
             robot_state_publisher_node,
             joint_state_publisher_node,
+            spawn_entity,
             rviz,
         ]
     )

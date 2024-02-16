@@ -1,18 +1,20 @@
 <?xml version="1.0"?>
 <robot  xmlns:xacro="http://www.ros.org/wiki/xacro">
-    <xacro:macro name="shuidi">
+    <xacro:macro name="shuidi" params="prefix">
         <xacro:include filename="$(find xarm_shuidi_description)/urdf/components/wheel.urdf.xacro" />
         <xacro:include filename="$(find xarm_shuidi_description)/urdf/components/body.urdf.xacro" />
         <xacro:include filename="$(find xarm_shuidi_description)/urdf/components/caster.urdf.xacro" />
+        <xacro:include filename="$(find xarm_shuidi_description)/urdf/components/batteries.urdf.xacro" />
         <xacro:include filename="$(find xarm_shuidi_description)/gazebo/lidar.xacro" />
         <xacro:include filename="$(find xarm_shuidi_description)/gazebo/imu.xacro" />
 
 
-        <xacro:body />
-        <xacro:wheel prefix="left" parent="base_link" xyz="0 0.18 0.059" rpy="-1.5707 0 0" />
-        <xacro:wheel prefix="right" parent="base_link" xyz="0 -0.18 0.059" rpy="-1.5707 0 0" />
-        <xacro:caster prefix="front" parent="base_link" xyz="0.097 0 0.034" rpy="1.57 0 0" />
-        <xacro:caster prefix="rear" parent="base_link" xyz="-0.14 0 0.034" rpy="1.57 0 0" />
+        <xacro:body prefix="${prefix}"/>
+        <xacro:wheel prefix="${prefix}left" parent="${prefix}base_link" xyz="0 0.18 0.059" rpy="-1.5707 0 0" />
+        <xacro:wheel prefix="${prefix}right" parent="${prefix}base_link" xyz="0 -0.18 0.059" rpy="-1.5707 0 0" />
+        <xacro:caster prefix="${prefix}front" parent="${prefix}base_link" xyz="0.097 0 0.034" rpy="1.57 0 0" />
+        <xacro:caster prefix="${prefix}rear" parent="${prefix}base_link" xyz="-0.14 0 0.034" rpy="1.57 0 0" />
+        <xacro:battery prefix="${prefix}" parent="${prefix}base_link" xyz="0 0 0.277" rpy="0 0 0" />
         
         <!-- sensor -->
         <!-- <xacro:lidar parent="base_link" xyz="0.3 0 0.28" rpy="0 0 0" />
