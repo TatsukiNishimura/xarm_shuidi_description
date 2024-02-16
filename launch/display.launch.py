@@ -32,8 +32,10 @@ from launch.substitutions import LaunchConfiguration
 gazebo_ros2_control_demos_path = os.path.join(
     get_package_share_directory("xarm_shuidi_description"),
 )
-xacro_file = os.path.join(gazebo_ros2_control_demos_path, "urdf", "shuidi.urdf.xacro")
-urdf_path = os.path.join(gazebo_ros2_control_demos_path, "urdf", "shuidi.urdf")
+xacro_file = os.path.join(
+    gazebo_ros2_control_demos_path, "urdf", "xarm_shuidi.urdf.xacro"
+)
+urdf_path = os.path.join(gazebo_ros2_control_demos_path, "urdf", "xarm_shuidi.urdf")
 
 
 def generate_launch_description():

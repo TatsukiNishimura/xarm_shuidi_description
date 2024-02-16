@@ -1,54 +1,22 @@
 <?xml version="1.0"?>
-<robot name="diff_drive" xmlns:xacro="http://www.ros.org/wiki/xacro">
-
-    <xacro:include filename="$(find xarm_shuidi_description)/urdf/wheel.urdf.xacro" />
-    <xacro:include filename="$(find xarm_shuidi_description)/ros2_control/shuidi.ros2_control.xacro" />
-    <xacro:include filename="$(find xarm_shuidi_description)/urdf/body.urdf.xacro" />
-    <xacro:include filename="$(find xarm_shuidi_description)/urdf/caster.urdf.xacro" />
-    <xacro:include filename="$(find xarm_shuidi_description)/xacro/lidar.xacro" />
-    <xacro:include filename="$(find xarm_shuidi_description)/xacro/imu.xacro" />
-
-
-    <xacro:body />
-    <xacro:wheel prefix="left" parent="base_link" xyz="0 0.18 0.059" rpy="-1.5707 0 0" />
-    <xacro:wheel prefix="right" parent="base_link" xyz="0 -0.18 0.059" rpy="-1.5707 0 0" />
-    <xacro:caster prefix="front" parent="base_link" xyz="0.097 0 0.034" rpy="1.57 0 0" />
-    <xacro:caster prefix="rear" parent="base_link" xyz="-0.14 0 0.034" rpy="1.57 0 0" />
-    <!-- <xacro:lidar parent="base_link" xyz="0.3 0 0.28" rpy="0 0 0" />
-    <xacro:imu parent="base_link" xyz="0 0 0.8" rpy="0 0 0" /> -->
-    <xacro:diff_drive_control left_joint="left_wheel_joint" right_joint="right_wheel_joint" />
+<robot  xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:macro name="shuidi">
+        <xacro:include filename="$(find xarm_shuidi_description)/urdf/wheel.urdf.xacro" />
+        <xacro:include filename="$(find xarm_shuidi_description)/urdf/body.urdf.xacro" />
+        <xacro:include filename="$(find xarm_shuidi_description)/urdf/caster.urdf.xacro" />
+        <xacro:include filename="$(find xarm_shuidi_description)/xacro/lidar.xacro" />
+        <xacro:include filename="$(find xarm_shuidi_description)/xacro/imu.xacro" />
 
 
-    <gazebo>
-        <!-- Joint state publisher -->
-        <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
-            <robot_param>robot_description</robot_param>
-            <robot_param_node>robot_state_publisher</robot_param_node>
-            <parameters>$(find xarm_shuidi_description)/config/diff_drive_controller.yaml</parameters>
-        </plugin>
-        <!-- <plugin name="diff_drive" filename="libgazebo_ros_diff_drive.so">
-            <ros>
-                <remapping>cmd_vel:=cmd_vel</remapping>
-                <namespace>/diff_drive_base_controller</namespace>
-                <remapping>odom:=odom</remapping>
-            </ros>
-            <left_joint>left_wheel_joint</left_joint>
-            <right_joint>right_wheel_joint</right_joint>
-            <wheel_separation>0.42</wheel_separation>
-            <wheel_radius>0.125</wheel_radius>
-            <max_wheel_torque>20</max_wheel_torque>
-            <max_wheel_acceleration>1.0</max_wheel_acceleration>
-            <publish_odom>true</publish_odom>
-            <publish_odom_tf>false</publish_odom_tf>
-            <publish_wheel_tf>true</publish_wheel_tf>
-            <update_rate>30</update_rate>
-
-            <odometry_topic>odom</odometry_topic>
-            <odometry_frame>odom</odometry_frame>
-            <base_frame_id>base_link</base_frame_id>
-            <robot_base_frame>base_link</robot_base_frame>
-            <command_topic>cmd_vel</command_topic>
-        </plugin> -->
-    </gazebo>
-
+        <xacro:body />
+        <xacro:wheel prefix="left" parent="base_link" xyz="0 0.18 0.059" rpy="-1.5707 0 0" />
+        <xacro:wheel prefix="right" parent="base_link" xyz="0 -0.18 0.059" rpy="-1.5707 0 0" />
+        <xacro:caster prefix="front" parent="base_link" xyz="0.097 0 0.034" rpy="1.57 0 0" />
+        <xacro:caster prefix="rear" parent="base_link" xyz="-0.14 0 0.034" rpy="1.57 0 0" />
+        
+        <!-- sensor -->
+        <!-- <xacro:lidar parent="base_link" xyz="0.3 0 0.28" rpy="0 0 0" />
+        <xacro:imu parent="base_link" xyz="0 0 0.8" rpy="0 0 0" /> -->
+   
+    </xacro:macro>
 </robot>

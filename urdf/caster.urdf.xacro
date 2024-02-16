@@ -46,11 +46,5 @@
                     izz="0.1" />
             </inertial>
         </link>
-        <gazebo reference="${prefix}_caster">
-            <material>Gazebo/Blue</material>
-            <!-- 摩擦係数はとりあえず0にして引っかからないようにする -->
-            <mu1>0.0</mu1>
-            <mu2>0.0</mu2>
-        </gazebo>
     </xacro:macro>
 </robot>

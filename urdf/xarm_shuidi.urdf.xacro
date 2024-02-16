@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<robot name="xarm_shuidi" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- urdf -->
+    <xacro:include filename="$(find xarm_shuidi_description)/urdf/shuidi.urdf.xacro" />
+    <!-- gazebo -->
+    <xacro:include filename="$(find xarm_shuidi_description)/gazebo/shuidi.gazebo.xacro" />
+    <!-- ros2_control -->
+    <xacro:include filename="$(find xarm_shuidi_description)/ros2_control/shuidi.ros2_control.xacro" />
+
+
+    <xacro:shuidi />
+    <xacro:shuidi_gazebo />
+    <xacro:diff_drive_control left_joint="left_wheel_joint" right_joint="right_wheel_joint" />
+
+
+</robot>

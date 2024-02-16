@@ -34,8 +34,6 @@
                     izz="0.6" />
             </inertial>
         </link>
-        <gazebo reference="base_link">
-            <material>Gazebo/White</material>
-        </gazebo>
+       
     </xacro:macro>
 </robot>

@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:macro name="shuidi_gazebo">
+        <gazebo reference="left_wheel">
+                <material>Gazebo/Red</material>
+        </gazebo>
+        <gazebo reference="right_wheel">
+                <material>Gazebo/Red</material>
+        </gazebo>
+        <gazebo reference="base_link">
+            <material>Gazebo/White</material>
+        </gazebo>
+
+        <gazebo reference="front_caster">
+            <material>Gazebo/Blue</material>
+            <!-- 摩擦係数はとりあえず0にして引っかからないようにする -->
+            <mu1>0.0</mu1>
+            <mu2>0.0</mu2>
+        </gazebo>
+        <gazebo reference="rear_caster">
+            <material>Gazebo/Blue</material>
+            <!-- 摩擦係数はとりあえず0にして引っかからないようにする -->
+            <mu1>0.0</mu1>
+            <mu2>0.0</mu2>
+        </gazebo>
+
+        <gazebo>
+            <!-- Joint state publisher -->
+            <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+                <robot_param>robot_description</robot_param>
+                <robot_param_node>robot_state_publisher</robot_param_node>
+                <parameters>$(find xarm_shuidi_description)/config/diff_drive_controller.yaml</parameters>
+            </plugin>
+            <!-- <plugin name="diff_drive" filename="libgazebo_ros_diff_drive.so">
+                <ros>
+                    <remapping>cmd_vel:=cmd_vel</remapping>
+                    <namespace>/diff_drive_base_controller</namespace>
+                    <remapping>odom:=odom</remapping>
+                </ros>
+                <left_joint>left_wheel_joint</left_joint>
+                <right_joint>right_wheel_joint</right_joint>
+                <wheel_separation>0.42</wheel_separation>
+                <wheel_radius>0.125</wheel_radius>
+                <max_wheel_torque>20</max_wheel_torque>
+                <max_wheel_acceleration>1.0</max_wheel_acceleration>
+                <publish_odom>true</publish_odom>
+                <publish_odom_tf>false</publish_odom_tf>
+                <publish_wheel_tf>true</publish_wheel_tf>
+                <update_rate>30</update_rate>
+
+                <odometry_topic>odom</odometry_topic>
+                <odometry_frame>odom</odometry_frame>
+                <base_frame_id>base_link</base_frame_id>
+                <robot_base_frame>base_link</robot_base_frame>
+                <command_topic>cmd_vel</command_topic>
+            </plugin> -->
+        </gazebo>
+    </xacro:macro>
+</robot>

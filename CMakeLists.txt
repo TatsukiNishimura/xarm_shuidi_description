@@ -32,6 +32,7 @@ install(DIRECTORY
   ros2_control
   rviz
   meshes
+  gazebo
   DESTINATION share/${PROJECT_NAME}/
 )
 
