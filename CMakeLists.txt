@@ -28,7 +28,6 @@ install(DIRECTORY
   config
   world
   urdf
-  xacro
   ros2_control
   rviz
   meshes

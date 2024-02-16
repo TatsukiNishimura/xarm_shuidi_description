@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <robot  xmlns:xacro="http://www.ros.org/wiki/xacro">
     <xacro:macro name="shuidi">
-        <xacro:include filename="$(find xarm_shuidi_description)/urdf/wheel.urdf.xacro" />
-        <xacro:include filename="$(find xarm_shuidi_description)/urdf/body.urdf.xacro" />
-        <xacro:include filename="$(find xarm_shuidi_description)/urdf/caster.urdf.xacro" />
-        <xacro:include filename="$(find xarm_shuidi_description)/xacro/lidar.xacro" />
-        <xacro:include filename="$(find xarm_shuidi_description)/xacro/imu.xacro" />
+        <xacro:include filename="$(find xarm_shuidi_description)/urdf/components/wheel.urdf.xacro" />
+        <xacro:include filename="$(find xarm_shuidi_description)/urdf/components/body.urdf.xacro" />
+        <xacro:include filename="$(find xarm_shuidi_description)/urdf/components/caster.urdf.xacro" />
+        <xacro:include filename="$(find xarm_shuidi_description)/gazebo/lidar.xacro" />
+        <xacro:include filename="$(find xarm_shuidi_description)/gazebo/imu.xacro" />
 
 
         <xacro:body />
