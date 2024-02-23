@@ -32,7 +32,7 @@ urdf_path = os.path.join(gazebo_ros2_control_demos_path, "urdf", "xarm_shuidi.ur
 
 
 def generate_launch_description():
-    show_rviz = LaunchConfiguration("show_rviz", default=True)
+    start_rviz = LaunchConfiguration("start_rviz", default=True)
 
     rviz_config_path = os.path.join(
         gazebo_ros2_control_demos_path, "rviz", "show_urdf.rviz"
@@ -72,7 +72,7 @@ def generate_launch_description():
         executable="rviz2",
         output="both",
         arguments=["-d", [rviz_config_path]],
-        condition=IfCondition(show_rviz),
+        condition=IfCondition(start_rviz),
     )
 
     return LaunchDescription(

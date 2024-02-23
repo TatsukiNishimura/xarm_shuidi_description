@@ -23,9 +23,9 @@
   <exec_depend>ros2_controllers</exec_depend>
   <exec_depend>velocity_controllers</exec_depend>
   <exec_depend>xacro</exec_depend>
+  <exec_depend>xarm_description</exec_depend>
 
   <export>
     <build_type>ament_cmake</build_type>
-    <gazebo_ros gazebo_media_path="${prefix}/world" />
   </export>
 </package>

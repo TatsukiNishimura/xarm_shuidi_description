@@ -8,21 +8,30 @@
         </joint>
 
 
-
         <link name="${prefix}battery">
             <collision>
                 <geometry>
-                       <mesh filename="file://$(find xarm_shuidi_description)/meshes/battery.stl"/>
+                    <mesh filename="file://$(find xarm_shuidi_description)/meshes/battery.stl" />
                 </geometry>
             </collision>
             <visual>
                 <geometry>
-                       <mesh filename="file://$(find xarm_shuidi_description)/meshes/battery.stl"/>
+                    <mesh filename="file://$(find xarm_shuidi_description)/meshes/battery.stl" />
                 </geometry>
-               <material name="white">
+                <material name="white">
                     <color rgba="1 1 1 1" />
                 </material>
             </visual>
+            <inertial>
+                <mass value="5.0" />
+                <inertia ixx="0.3"
+                    ixy="0.0"
+                    ixz="0.0"
+                    iyy="0.3"
+                    iyz="0.0"
+                    izz="0.3" />
+            </inertial>
+
         </link>
 
         <joint name="${prefix}battery_fixture_joint" type="fixed">
@@ -34,13 +43,15 @@
         <link name="${prefix}battery_fixture">
             <collision>
                 <geometry>
-                       <mesh filename="file://$(find xarm_shuidi_description)/meshes/battery_fixture.stl"/>
+                    <mesh
+                        filename="file://$(find xarm_shuidi_description)/meshes/battery_fixture.stl" />
                 </geometry>
             </collision>
 
             <visual>
                 <geometry>
-                       <mesh filename="file://$(find xarm_shuidi_description)/meshes/battery_fixture.stl"/>
+                    <mesh
+                        filename="file://$(find xarm_shuidi_description)/meshes/battery_fixture.stl" />
                 </geometry>
                 <material name="white">
                     <color rgba="1 1 1 1" />

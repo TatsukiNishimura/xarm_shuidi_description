@@ -7,7 +7,7 @@
                 <origin xyz="0 0 0.0" rpy="0 0 0" />
                 <geometry>
                     <!-- <box size="0.5 0.33 0.7" /> -->
-                    <mesh filename="file://$(find xarm_shuidi_description)/meshes/shuidi_agv.stl"/>
+                    <mesh filename="file://$(find xarm_shuidi_description)/meshes/shuidi_agv.stl" />
                 </geometry>
             </collision>
 
@@ -15,7 +15,7 @@
                 <origin xyz="0 0 0.0" rpy="0 0 0" />
                 <geometry>
                     <!-- <box size="0.5 0.33 0.7" /> -->
-                     <mesh filename="file://$(find xarm_shuidi_description)/meshes/shuidi_agv.stl"/>
+                    <mesh filename="file://$(find xarm_shuidi_description)/meshes/shuidi_agv.stl" />
                 </geometry>
                 <material name="white">
                     <color rgba="1 1 1 1" />
@@ -23,17 +23,17 @@
             </visual>
 
             <inertial>
-                <origin xyz="0 0 0.45" rpy="0 0 0" />
+                <origin xyz="0 0 0.2" rpy="0 0 0" />
                 <mass value="30" />
                 <inertia
-                    ixx="0.6"
+                    ixx="1.0"
                     ixy="0.0"
                     ixz="0.0"
-                    iyy="0.6"
+                    iyy="1.0"
                     iyz="0.0"
-                    izz="0.6" />
+                    izz="1.9" />
             </inertial>
         </link>
-       
+
     </xacro:macro>
 </robot>

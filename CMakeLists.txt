@@ -25,8 +25,6 @@ endif()
 
 install(DIRECTORY
   launch
-  config
-  world
   urdf
   ros2_control
   rviz
