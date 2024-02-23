@@ -38,7 +38,7 @@
                 <robot_param_node>robot_state_publisher</robot_param_node>
                 <parameters>$(find xarm_shuidi_bringup)/config/diff_drive_controller.yaml</parameters>
             </plugin> -->
-            <plugin name="diff_drive" filename="libgazebo_ros_diff_drive.so">
+            <!-- <plugin name="diff_drive" filename="libgazebo_ros_diff_drive.so">
                 <ros>
                     <remapping>cmd_vel:=cmd_vel</remapping>
                     <namespace>/diff_drive_${prefix}</namespace>
@@ -47,7 +47,6 @@
                 <left_joint>${prefix}left_wheel_joint</left_joint>
                 <right_joint>${prefix}right_wheel_joint</right_joint>
                 <wheel_separation>0.6</wheel_separation>
-                <!-- <wheel_radius>0.125</wheel_radius> -->
                 <wheel_diameter>0.2</wheel_diameter>
                 <max_wheel_torque>30</max_wheel_torque>
                 <max_wheel_acceleration>3.0</max_wheel_acceleration>
@@ -61,6 +60,21 @@
                 <base_frame_id>base_link</base_frame_id>
                 <robot_base_frame>base_link</robot_base_frame>
                 <command_topic>cmd_vel</command_topic>
+            </plugin> -->
+            <plugin name="object_controller" filename="libgazebo_ros_planar_move.so">
+                <ros>
+                    <!-- Add a namespace -->
+                    <namespace>/diff_drive_${prefix}</namespace>
+                    <!-- Remap the default topic -->
+                    <remapping>cmd_vel:=cmd_vel</remapping>
+                    <remapping>odom:=odom</remapping>
+                </ros>
+                <publish_odom>true</publish_odom>
+                <publish_odom_tf>true</publish_odom_tf>
+                <odometry_frame>odom</odometry_frame>
+                <update_rate>50</update_rate>
+                <publish_rate>20.0</publish_rate>
+                <robot_base_frame>${prefix}base_link</robot_base_frame>
             </plugin>
         </gazebo>
     </xacro:macro>
